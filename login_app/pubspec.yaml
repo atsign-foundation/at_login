@@ -1,0 +1,33 @@
+name: app
+description: AtLogin mobile application
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0-0.0 <3.0.0"
+
+dependencies:
+  at_client_mobile: 1.0.0+5
+  at_demo_data: ^0.0.3+1
+  at_server_status: ^0.1.0+1
+  at_commons: ^1.0.1+5
+  path_provider: ^2.0.1
+  flutter_qr_reader: 1.0.3
+  pedantic: ^1.11.0
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+dependency_overrides:
+  crypto: 3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/atsign.png
+    - assets/logo.png
