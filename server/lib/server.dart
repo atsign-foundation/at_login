@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:at_client/at_client.dart';
-import 'package:at_commons/at_commons.dart' as at_commons;
+import 'package:at_lookup/at_lookup.dart';
 import 'package:barcode_image/barcode_image.dart' as barcode;
 import 'package:image/image.dart' as img;
 import 'package:server/model/client_state.dart';
@@ -31,8 +30,7 @@ class Server {
 
   late final Router _app;
 
-  late final AtClientPreference _prefs;
-  late final AtClient _client;
+  AtLookupImpl? _lookup;
   late Timer _timer;
 
   static String atSign = '@bob🛠';
@@ -52,29 +50,14 @@ class Server {
       hostname,
       port,
     );
-
-    _prefs = AtClientPreference()
-      ..namespace = 'login'
-      ..syncStrategy = SyncStrategy.IMMEDIATE
-      ..rootDomain = 'vip.ve.atsign.zone';
-    await AtClientImpl.createClient(atSign, 'login', _prefs);
-    _client = await AtClientImpl.getClient(atSign);
-    final atLookUp = _client.getRemoteSecondary().atLookUp;
-    print('atlookup ${atLookUp.connection}');
     _timer = Timer.periodic(const Duration(seconds: 3), _checkLogin);
   }
 
   void _checkLogin(Timer timer) async {
-    if (challenge != null) {
-      final pair = at_commons.AtKey();
-      pair.key = 'test';
-      pair.sharedWith = atSign;
+    if (challenge != null && _lookup != null) {
       try {
-        final result = await _client
-            .getRemoteSecondary()
-            .atLookUp
-            .scan(regex: '.*', sharedBy: atSign, auth: false);
-        print('Success ${result}');
+        final value = await _lookup!.lookup(atSign + ':test.login', atSign, auth: false);
+        print('Success ${value}');
       } catch (error) {
         print('Failed $error');
       }
@@ -123,6 +106,7 @@ class Server {
     final session = sessionState(request);
     session.auth = randomString(16);
     atsign = '@bob🛠';
+    _lookup = AtLookupImpl(atSign, 'vip.ve.atsign.zone', 64);
     challenge = session.auth;
     return Response.ok(
       '$atsign ${describeIdentity(session)}: ${session.auth}',

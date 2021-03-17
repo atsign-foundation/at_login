@@ -14,6 +14,8 @@ dependencies:
   shelf_cookie: ^1.1.1
   at_client: ^1.0.1+7
   at_commons: ^1.0.1+5
+  at_lookup: ^1.0.0+5
+  at_server_status: ^0.1.0+1
   barcode_image: ^2.0.0-nullsafety
   image: ^3.0.1
   charcode: ^1.2.0

@@ -1,7 +1,3 @@
-import 'package:server/server.dart';
+import 'package:server/main.dart' as server;
 
-Future<void> main(List<String> args) async {
-  final server = Server();
-  await server.start('localhost', 8080);
-  print('Serving at http://${server.address.host}:${server.port}');
-}
+Future<void> main(List<String> args) => server.main(args);

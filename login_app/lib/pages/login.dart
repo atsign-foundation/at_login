@@ -2,6 +2,7 @@ import 'package:app/pages/home.dart';
 import 'package:app/services/service.dart';
 import 'package:at_demo_data/at_demo_data.dart' as at_demo_data;
 import 'package:flutter/material.dart';
+import 'package:pedantic/pedantic.dart';
 
 @immutable
 class LoginScreen extends StatefulWidget {
@@ -26,14 +27,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _login() {
     _loading = () async {
-      String atSign = '@bob🛠';
-      String jsonData = _service.encryptKeyPairs(atSign);
-      _service.onboard(atsign: atSign).then((value) async {
-        Navigator.pushReplacementNamed(context, HomeScreen.id);
+      final atSign = '@bob🛠';
+      final jsonData = _service.encryptKeyPairs(atSign);
+      await _service.onboard(atsign: atSign).then((value) async {
+        unawaited(Navigator.pushReplacementNamed(context, HomeScreen.id));
       }).catchError((error) async {
         await _service.authenticate(atSign,
             jsonData: jsonData, decryptKey: at_demo_data.aesKeyMap[atSign]);
-        Navigator.pushReplacementNamed(context, HomeScreen.id);
+        unawaited(Navigator.pushReplacementNamed(context, HomeScreen.id));
       });
     }();
   }

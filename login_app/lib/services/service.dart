@@ -38,7 +38,7 @@ class Service {
 
   Future<AtClientPreference> _getAtClientPreference({String? cramSecret}) async {
     final appDocumentDirectory = await path_provider.getApplicationSupportDirectory();
-    String path = appDocumentDirectory.path;
+    final path = appDocumentDirectory.path;
     var _atClientPreference = AtClientPreference()
       ..isLocalStoreRequired = true
       ..commitLogPath = path
@@ -63,7 +63,7 @@ class Service {
         atClientPreference: atClientPreference, atsign: atsign);
     _atsign = atsign;
     atClientServiceMap.putIfAbsent(_atsign!, () => atClientServiceInstance);
-    _sync();
+    await _sync();
     return result;
   }
 
