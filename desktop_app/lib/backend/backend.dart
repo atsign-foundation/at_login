@@ -12,7 +12,7 @@ enum LoginState {
 
 class Backend extends ChangeNotifier {
   var _loginState = LoginState.LoggedOut;
-  late final AtLookupImpl _atLookup;
+  late AtLookupImpl _atLookup;
   Timer? _timer;
   String? _atSign;
   String? _location;

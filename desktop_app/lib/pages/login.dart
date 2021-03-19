@@ -39,59 +39,62 @@ class _LoginState extends State<Login> {
           Expanded(
             child: Center(
               child: IntrinsicWidth(
-                child: Consumer<Backend>(
-                  builder: (BuildContext context, Backend backend, Widget? child) {
-                    if (backend.state == LoginState.LoggingIn) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            'Please scan this QR Code\nin the @login app.',
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 32.0),
-                          BarcodeWidget(
-                            barcode: Barcode.qrCode(
-                              typeNumber: 3,
-                              errorCorrectLevel: BarcodeQRCorrectionLevel.quartile,
+                child: Transform.scale(
+                  scale: 1.25,
+                  child: Consumer<Backend>(
+                    builder: (BuildContext context, Backend backend, Widget? child) {
+                      if (backend.state == LoginState.LoggingIn) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              'Please scan this QR Code\nin the @login app.',
+                              textAlign: TextAlign.center,
                             ),
-                            width: 256.0,
-                            height: 256.0,
-                            data: backend.challenge,
-                          ),
-                          const SizedBox(height: 32.0),
-                          ElevatedButton(
-                            onPressed: _cancel,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 48.0),
-                              child: Text('Cancel'),
+                            const SizedBox(height: 32.0),
+                            BarcodeWidget(
+                              barcode: Barcode.qrCode(
+                                typeNumber: 3,
+                                errorCorrectLevel: BarcodeQRCorrectionLevel.quartile,
+                              ),
+                              width: 256.0,
+                              height: 256.0,
+                              data: backend.challenge,
                             ),
-                          )
-                        ],
-                      );
-                    }
-                    return child!;
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      TextField(
-                        controller: _atSignController,
-                        decoration: InputDecoration(
-                          labelText: 'AtSign',
+                            const SizedBox(height: 32.0),
+                            ElevatedButton(
+                              onPressed: _cancel,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 48.0),
+                                child: Text('Cancel'),
+                              ),
+                            )
+                          ],
+                        );
+                      }
+                      return child!;
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        TextField(
+                          controller: _atSignController,
+                          decoration: InputDecoration(
+                            labelText: 'AtSign',
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16.0),
-                      ElevatedButton(
-                        onPressed: _login,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 48.0),
-                          child: Text('Login To App'),
-                        ),
-                      )
-                    ],
+                        const SizedBox(height: 16.0),
+                        ElevatedButton(
+                          onPressed: _login,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 48.0),
+                            child: Text('Login'),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
