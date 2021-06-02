@@ -56,8 +56,9 @@ class Server {
   void _checkLogin(Timer timer) async {
     if (challenge != null && _lookup != null) {
       try {
-        final value = await _lookup!.lookup(atSign + ':test.login', atSign, auth: false);
-        print('Success ${value}');
+        final value =
+            await _lookup!.lookup(atSign + ':test.login', atSign, auth: false);
+        print('Success $value');
       } catch (error) {
         print('Failed $error');
       }
