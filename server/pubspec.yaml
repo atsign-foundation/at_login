@@ -1,7 +1,7 @@
 name: server
-description: A web server built using the shelf package.
-# version: 1.0.0
-# homepage: https://www.example.com
+description: An example server that provides secure passwordless authentication for the @platform over HTTP.
+version: 0.1.0
+homepage: https://github.com/atsign-foundation/at_login/tree/master/server
 environment:
   sdk: '>=2.12.0-0.0 <3.0.0'
 
@@ -21,10 +21,11 @@ dependencies:
 
 dev_dependencies:
   pedantic: ^1.10.0
+  test: ^1.14.4
 
 dependency_overrides:
   args: ^2.0.0 # overridden for barcode_image
-  convert: ^3.0.0 # overidden for shelf_static
-  shelf: ^1.0.0 # overriden for  shelf_router
+  convert: ^3.0.0 # overridden for shelf_static
+  shelf: ^1.0.0 # overridden for  shelf_router
   image: ^3.0.1
   crypto: 3.0.0

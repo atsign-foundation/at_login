@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-
+import 'dart:convert';
 import 'package:at_lookup/at_lookup.dart';
 import 'package:barcode_image/barcode_image.dart' as barcode;
 import 'package:image/image.dart' as img;
@@ -19,7 +19,10 @@ class Server {
       defaultDocument: 'index.html',
     );
     _app = Router()
-      ..get('/login/<atsign>', _login)
+      ..get('/login/<atsign>', _handleUrlLogin)
+      ..get('/login/<atsign>/remember', _handleUrlLogin)
+      ..get('/login', _handleUrlParamLogin)
+      ..post('/login', _handlePostLogin)
       ..get('/qrcode', _generateQRCode)
       ..mount('/', public);
   }
@@ -31,9 +34,13 @@ class Server {
   late final Router _app;
 
   AtLookupImpl? _lookup;
+
   late Timer _timer;
 
-  static String atSign = '@bob🛠';
+  static String atSign = '';
+
+  static bool remember = false;
+
   String? challenge;
 
   InternetAddress get address => _server.address;
@@ -50,14 +57,14 @@ class Server {
       hostname,
       port,
     );
-    _timer = Timer.periodic(const Duration(seconds: 3), _checkLogin);
+    // _timer = Timer.periodic(const Duration(seconds: 3), _checkLogin);
   }
 
   void _checkLogin(Timer timer) async {
     if (challenge != null && _lookup != null) {
       try {
         final value =
-            await _lookup!.lookup(atSign + ':test.login', atSign, auth: false);
+        await _lookup!.lookup(atSign + ':test.login', atSign, auth: false);
         print('Success $value');
       } catch (error) {
         print('Failed $error');
@@ -103,18 +110,98 @@ class Server {
     return _sessionState[request.context['session_id'] as String]!;
   }
 
-  Response _login(Request request, String atsign) {
-    final session = sessionState(request);
-    session.auth = randomString(16);
-    atsign = '@bob🛠';
-    _lookup = AtLookupImpl(atSign, 'vip.ve.atsign.zone', 64);
-    challenge = session.auth;
-    return Response.ok(
-      '$atsign ${describeIdentity(session)}: ${session.auth}',
-      headers: {
-        HttpHeaders.contentTypeHeader: 'text/plain',
-      },
-    );
+  Future<Response> _handlePostLogin(Request request) async {
+    // print('got to _handlePostLogin');
+    try {
+      var body = await request.readAsString(utf8);
+      var loginMap = parseFormData(body);
+      atSign = loginMap['atsign'];
+      if(atSign.isEmpty) {
+        final errorPage = File('public/404.html').readAsStringSync();
+        return Response.notFound(
+          errorPage,
+          headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+        );
+      };
+      remember = loginMap['remember'];
+      final session = sessionState(request);
+      session.auth = randomString(16);
+      _lookup = AtLookupImpl(atSign, 'root.atsign.org', 64);
+      // _lookup = AtLookupImpl(atSign, 'vip.ve.atsign.zone', 64);
+      challenge = session.auth;
+      final qrcodePage = File('public/qrcode.html').readAsStringSync();
+      return Response.ok(
+        qrcodePage,
+        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+      );
+    } catch(error) {
+      return Response.internalServerError();
+    }
+  }
+
+  Response _handleUrlLogin(Request request) {
+    print('got to _handleUrlLogin');
+    var loginMap = parseUrlPath(request.url);
+    atSign = loginMap['atsign'];
+    if(atSign.isEmpty) {
+      final errorPage = File('public/404.html').readAsStringSync();
+      return Response.notFound(
+        errorPage,
+        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+      );
+    };
+    remember = loginMap['remember'];
+    print('_handleUrlLogin.atSignIn: $atSign');
+    print('_handleUrlLogin.remember: $remember');
+    try {
+      final session = sessionState(request);
+      session.auth = randomString(16);
+      _lookup = AtLookupImpl(atSign, 'root.atsign.org', 64);
+      // _lookup = AtLookupImpl(atSign, 'vip.ve.atsign.zone', 64);
+      challenge = session.auth;
+      final qrCodePage = File('public/qrcode.html').readAsStringSync();
+      return Response.ok(
+        qrCodePage,
+        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+      );
+    } catch(error) {
+      return Response.internalServerError();
+    }
+  }
+
+  Response _handleUrlParamLogin(Request request) {
+    // print('got to _handleUrlParamLogin');
+    var params = request.url.queryParameters;
+    if(params.isEmpty) {
+      final errorPage = File('public/404.html').readAsStringSync();
+      return Response.notFound(
+        errorPage,
+        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+      );
+    }
+    atSign = params['atsign']!;
+    if(atSign.isEmpty) {
+      final errorPage = File('public/404.html').readAsStringSync();
+      return Response.notFound(
+        errorPage,
+        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+      );
+    };
+    remember = params['remember'] == 'on'? true : false;
+    try {
+      final session = sessionState(request);
+      session.auth = randomString(16);
+      _lookup = AtLookupImpl(atSign, 'root.atsign.org', 64);
+      // _lookup = AtLookupImpl(atSign, 'vip.ve.atsign.zone', 64);
+      challenge = session.auth;
+      final qrCodePage = File('public/qrcode.html').readAsStringSync();
+      return Response.ok(
+        qrCodePage,
+        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+      );
+    } catch(error) {
+      return Response.internalServerError();
+    }
   }
 
   Response _generateQRCode(Request request) {
@@ -136,4 +223,5 @@ class Server {
       headers: {HttpHeaders.contentTypeHeader: 'image/png'},
     );
   }
+
 }
