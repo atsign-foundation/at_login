@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:at_login_mobile/domain/at_notification.dart';
-import 'package:at_login_mobile/providers/follow_from_web_provider.dart';
+import 'package:at_login_mobile/providers/login_from_web_provider.dart';
 import 'package:at_login_mobile/services/at_services.dart';
 import 'package:at_login_mobile/services/user.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
@@ -70,7 +70,7 @@ class SharedData {
       followAtsign = atsign;
       globals.followType = FollowType.website;
       globals.loadFollowers = true;
-      FollowFromWebProvider().setPageState(null);
+      LoginFromWebProvider().setPageState(null);
     }
     _logger.info('Follow atsign received from web app is $followAtsign');
   }

@@ -144,13 +144,6 @@
 
 <div id="id01" class="modal">
     <form class="modal-content animate" action="/login" method="post">
-        <div class="imgcontainer">
-            <!--                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>-->
-<!--            <img src="img_avatar2.png" alt="Avatar" class="avatar">-->
-<!--            <img src="atsign.png" width="32" height="32" align="baseline">-->
-<!--            <img src="/qrcode"/>-->
-        </div>
-
         <div class="container">
             <label><b>Enter your @sign</b></label>
             <input id="atsign" name = "atsign" type="text" placeholder="@alice" required>
@@ -169,9 +162,10 @@
     urlPathButton.onclick = function(event) {
         event.preventDefault();
         let atsign = document.getElementById("atsign").value;
+        let remember = document.getElementById("remember").value;
         let urlPath = window.location.href+"login/"+atsign;
+        if(remember == 'on') urlPath += '/remember';
         console.log(urlPath);
-        // window.open(urlPath);
         window.location = urlPath;
     }
 </script>
@@ -184,7 +178,6 @@
         let remember = document.getElementById("remember").value;
         let urlPath = window.location.href+"login?atsign="+atsign+'&remember='+remember;
         console.log(urlPath);
-        // window.open(urlPath);
         window.location = urlPath;
     }
 </script>

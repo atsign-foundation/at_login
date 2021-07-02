@@ -37,11 +37,11 @@ class Server {
 
   late Timer _timer;
 
-  static String atSign = '';
+  static String? _atSign;
 
-  static bool remember = false;
+  static bool _remember = false;
 
-  String? challenge;
+  static String? challenge;
 
   InternetAddress get address => _server.address;
 
@@ -63,8 +63,8 @@ class Server {
   void _checkLogin(Timer timer) async {
     if (challenge != null && _lookup != null) {
       try {
-        final value =
-        await _lookup!.lookup(atSign + ':test.login', atSign, auth: false);
+        final value = await _lookup!
+            .lookup(_atSign! + ':test.login', _atSign!, auth: false);
         print('Success $value');
       } catch (error) {
         print('Failed $error');
@@ -115,26 +115,31 @@ class Server {
     try {
       var body = await request.readAsString(utf8);
       var loginMap = parseFormData(body);
-      atSign = loginMap['atsign'];
-      if(atSign.isEmpty) {
+      _atSign = loginMap['atsign'];
+      if (_atSign!.isEmpty) {
         final errorPage = File('public/404.html').readAsStringSync();
         return Response.notFound(
           errorPage,
-          headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+          headers: {
+            HttpHeaders.contentTypeHeader: 'text/html',
+          },
         );
-      };
-      remember = loginMap['remember'];
+      }
+      ;
+      _remember = loginMap['remember'];
       final session = sessionState(request);
       session.auth = randomString(16);
-      _lookup = AtLookupImpl(atSign, 'root.atsign.org', 64);
-      // _lookup = AtLookupImpl(atSign, 'vip.ve.atsign.zone', 64);
+      _lookup = AtLookupImpl(_atSign!, 'root.atsign.org', 64);
+      // _lookup = AtLookupImpl(_atSign, 'vip.ve.atsign.zone', 64);
       challenge = session.auth;
       final qrcodePage = File('public/qrcode.html').readAsStringSync();
       return Response.ok(
         qrcodePage,
-        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+        headers: {
+          HttpHeaders.contentTypeHeader: 'text/html',
+        },
       );
-    } catch(error) {
+    } catch (error) {
       return Response.internalServerError();
     }
   }
@@ -142,29 +147,34 @@ class Server {
   Response _handleUrlLogin(Request request) {
     print('got to _handleUrlLogin');
     var loginMap = parseUrlPath(request.url);
-    atSign = loginMap['atsign'];
-    if(atSign.isEmpty) {
+    _atSign = loginMap['atsign'];
+    if (_atSign!.isEmpty) {
       final errorPage = File('public/404.html').readAsStringSync();
       return Response.notFound(
         errorPage,
-        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+        headers: {
+          HttpHeaders.contentTypeHeader: 'text/html',
+        },
       );
-    };
-    remember = loginMap['remember'];
-    print('_handleUrlLogin.atSignIn: $atSign');
-    print('_handleUrlLogin.remember: $remember');
+    }
+
+    _remember = loginMap['remember'];
+    print('_handleUrlLogin._atSign: $_atSign');
+    print('_handleUrlLogin._remember: $_remember');
     try {
       final session = sessionState(request);
       session.auth = randomString(16);
-      _lookup = AtLookupImpl(atSign, 'root.atsign.org', 64);
-      // _lookup = AtLookupImpl(atSign, 'vip.ve.atsign.zone', 64);
+      _lookup = AtLookupImpl(_atSign!, 'root.atsign.org', 64);
+      // _lookup = AtLookupImpl(_atSign, 'vip.ve.atsign.zone', 64);
       challenge = session.auth;
       final qrCodePage = File('public/qrcode.html').readAsStringSync();
       return Response.ok(
         qrCodePage,
-        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+        headers: {
+          HttpHeaders.contentTypeHeader: 'text/html',
+        },
       );
-    } catch(error) {
+    } catch (error) {
       return Response.internalServerError();
     }
   }
@@ -172,34 +182,42 @@ class Server {
   Response _handleUrlParamLogin(Request request) {
     // print('got to _handleUrlParamLogin');
     var params = request.url.queryParameters;
-    if(params.isEmpty) {
+    if (params.isEmpty) {
       final errorPage = File('public/404.html').readAsStringSync();
       return Response.notFound(
         errorPage,
-        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+        headers: {
+          HttpHeaders.contentTypeHeader: 'text/html',
+        },
       );
     }
-    atSign = params['atsign']!;
-    if(atSign.isEmpty) {
+
+    _atSign = params['atsign']!;
+    if (_atSign!.isEmpty) {
       final errorPage = File('public/404.html').readAsStringSync();
       return Response.notFound(
         errorPage,
-        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+        headers: {
+          HttpHeaders.contentTypeHeader: 'text/html',
+        },
       );
-    };
-    remember = params['remember'] == 'on'? true : false;
+    }
+
+    _remember = params['remember'] == 'on' ? true : false;
     try {
       final session = sessionState(request);
       session.auth = randomString(16);
-      _lookup = AtLookupImpl(atSign, 'root.atsign.org', 64);
-      // _lookup = AtLookupImpl(atSign, 'vip.ve.atsign.zone', 64);
+      _lookup = AtLookupImpl(_atSign!, 'root.atsign.org', 64);
+      // _lookup = AtLookupImpl(_atSign, 'vip.ve.atsign.zone', 64);
       challenge = session.auth;
       final qrCodePage = File('public/qrcode.html').readAsStringSync();
       return Response.ok(
         qrCodePage,
-        headers: {HttpHeaders.contentTypeHeader: 'text/html',},
+        headers: {
+          HttpHeaders.contentTypeHeader: 'text/html',
+        },
       );
-    } catch(error) {
+    } catch (error) {
       return Response.internalServerError();
     }
   }
@@ -209,19 +227,30 @@ class Server {
     if (session.auth == null) {
       return Response.notFound('auth missing');
     }
+    var jsonContent = json.encode({
+      'atsign': _atSign!,
+      'challenge': session.auth,
+      'requestUrl': request.requestedUri.toString()
+    });
+    // var content = 'atsign::' +
+    //     _atSign! +
+    //     ',challenge::' +
+    //     session.auth! +
+    //     ',requestUrl::' +
+    //     request.requestedUri.toString();
+    print('content: $jsonContent, length: ${jsonContent.length}');
     final image = img.fill(img.Image(256, 256), 0xFFFFFFFF);
     barcode.drawBarcode(
       image,
       barcode.Barcode.qrCode(
-        typeNumber: 3,
+        typeNumber: 11,
         errorCorrectLevel: barcode.BarcodeQRCorrectionLevel.quartile,
       ),
-      session.auth!,
+      jsonContent,
     );
     return Response.ok(
       img.encodePng(image),
       headers: {HttpHeaders.contentTypeHeader: 'image/png'},
     );
   }
-
 }

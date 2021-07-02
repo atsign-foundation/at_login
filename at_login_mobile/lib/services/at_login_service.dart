@@ -3,6 +3,7 @@ import 'package:at_login_mobile/domain/at_notification.dart';
 import 'package:at_login_mobile/services/at_me_utils.dart';
 import 'package:at_login_mobile/services/notification_service.dart';
 import 'package:at_login_mobile/services/sdk_service.dart';
+import 'package:at_onboarding_flutter/services/onboarding_service.dart';
 import 'package:at_utils/at_logger.dart';
 import 'package:flutter/material.dart';
 import '../utils/app_constants.dart';
@@ -30,6 +31,10 @@ class AtLoginService {
   List<String> atSignsList = [];
 
   Map<dynamic, dynamic> _tempObject = {};
+
+  Future<bool> isExistingAtsign(atSign) async {
+    return await OnboardingService.getInstance().isExistingAtsign(atSign);
+  }
 
   ///Creates user's profile.
   ///

@@ -2,12 +2,12 @@ import 'package:at_login_mobile/providers/basic_provider.dart';
 import 'package:at_login_mobile/services/sdk_service.dart';
 import 'package:at_utils/at_logger.dart';
 
-class FollowFromWebProvider extends BasicProvider {
-  static final FollowFromWebProvider _singleton =
-      FollowFromWebProvider._internal();
-  FollowFromWebProvider._internal();
+class LoginFromWebProvider extends BasicProvider {
+  static final LoginFromWebProvider _singleton =
+      LoginFromWebProvider._internal();
+  LoginFromWebProvider._internal();
 
-  factory FollowFromWebProvider() {
+  factory LoginFromWebProvider() {
     return _singleton;
   }
 

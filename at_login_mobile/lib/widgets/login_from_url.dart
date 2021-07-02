@@ -1,7 +1,7 @@
 // import 'package:at_follows_flutter/screens/connections.dart';
 import 'package:at_login_mobile/domain/shared_data.dart';
 import 'package:at_login_mobile/providers/basic_provider.dart';
-import 'package:at_login_mobile/providers/follow_from_web_provider.dart';
+import 'package:at_login_mobile/providers/login_from_web_provider.dart';
 import 'package:at_login_mobile/services/at_services.dart';
 import 'package:at_login_mobile/services/onboarding_widget_service.dart';
 import 'package:at_login_mobile/utils/strings.dart';
@@ -31,7 +31,7 @@ class _LoginFromUrlState extends State<LoginFromUrl> {
         appBar: CustomAppBar(
           showBackButton: true,
         ),
-        body: Consumer<FollowFromWebProvider>(
+        body: Consumer<LoginFromWebProvider>(
           builder: (context, provider, _) {
             if (provider.pageState == PageState.loading) {
               return Center(

@@ -43,55 +43,69 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.6.1"
+  at_base2e15:
+    dependency: transitive
+    description:
+      name: at_base2e15
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   at_client:
     dependency: "direct main"
     description:
       name: at_client
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1+9"
+    version: "2.0.1"
   at_commons:
     dependency: "direct main"
     description:
       name: at_commons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1+7"
+    version: "2.0.1"
   at_lookup:
     dependency: "direct main"
     description:
       name: at_lookup
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0+7"
+    version: "2.0.1"
   at_persistence_secondary_server:
     dependency: transitive
     description:
       name: at_persistence_secondary_server
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1+7"
+    version: "2.0.1"
   at_persistence_spec:
     dependency: transitive
     description:
       name: at_persistence_spec
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1+3"
+    version: "2.0.0"
   at_server_status:
     dependency: "direct main"
     description:
       name: at_server_status
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0+2"
+    version: "1.0.0"
+  at_utf7:
+    dependency: transitive
+    description:
+      name: at_utf7
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   at_utils:
     dependency: transitive
     description:
       name: at_utils
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1+7"
+    version: "2.0.1"
   barcode:
     dependency: transitive
     description:
@@ -106,13 +120,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  base2e15:
-    dependency: transitive
-    description:
-      name: base2e15
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -168,7 +175,7 @@ packages:
       name: cron
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.4"
+    version: "0.3.0"
   crypto:
     dependency: "direct overridden"
     description:
@@ -259,7 +266,7 @@ packages:
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.11.4"
+    version: "1.0.1"
   matcher:
     dependency: transitive
     description:
@@ -463,13 +470,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
-  utf7:
-    dependency: transitive
-    description:
-      name: utf7
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.1"
   uuid:
     dependency: transitive
     description:
@@ -518,6 +518,6 @@ packages:
       name: yaml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.1"
+    version: "3.1.0"
 sdks:
   dart: ">=2.12.0 <3.0.0"

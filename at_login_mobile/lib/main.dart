@@ -1,4 +1,4 @@
-import 'package:at_login_mobile/providers/follow_from_web_provider.dart';
+import 'package:at_login_mobile/providers/login_from_web_provider.dart';
 import 'package:at_login_mobile/services/navigator_service.dart';
 import 'package:provider/provider.dart';
 import 'package:at_login_mobile/routes/app_routes.dart';
@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<FollowFromWebProvider>(
-            create: (context) => FollowFromWebProvider()),
+        ChangeNotifierProvider<LoginFromWebProvider>(
+            create: (context) => LoginFromWebProvider()),
       ],
       child: MaterialApp(
         navigatorKey: NavigatorService.navigatorKey,

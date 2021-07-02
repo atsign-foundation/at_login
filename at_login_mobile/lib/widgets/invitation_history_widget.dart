@@ -2,13 +2,13 @@ import 'package:at_login_mobile/services/at_services.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class InvitationHistoryWidget extends StatefulWidget {
+class LoginHistoryWidget extends StatefulWidget {
   @override
-  _InvitationHistoryWidgetState createState() =>
-      _InvitationHistoryWidgetState();
+  _LoginHistoryWidgetState createState() =>
+      _LoginHistoryWidgetState();
 }
 
-class _InvitationHistoryWidgetState extends State<InvitationHistoryWidget> {
+class _LoginHistoryWidgetState extends State<LoginHistoryWidget> {
   User user;
   StateContainerState container;
 
