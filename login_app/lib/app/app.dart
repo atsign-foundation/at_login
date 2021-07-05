@@ -17,7 +17,7 @@ class AtLoginApp extends StatelessWidget {
       initialRoute: LoginScreen.id,
       routes: {
         LoginScreen.id: (context) => LoginScreen(),
-        HomeScreen.id: (context) => HomeScreen(),
+        HomeWidget.id: (context) => HomeWidget(),
       },
     );
   }
