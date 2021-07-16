@@ -8,7 +8,8 @@ import 'package:server/model/client_state.dart';
 import 'package:server/utils.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as io;
-import 'package:shelf_cookie/shelf_cookie.dart';
+//import 'package:shelf_cookie/shelf_cookie.dart';
+import 'package:shelf_secure_cookie/shelf_secure_cookie.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf_static/shelf_static.dart' as shelf_static;
 
