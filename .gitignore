@@ -62,3 +62,4 @@ app.*.map.json
 .idea/libraries/Dart_Packages.xml
 .idea/libraries/Dart_Packages.xml
 server/pubspec.lock
+/at_login_verify_service/target/
