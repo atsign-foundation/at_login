@@ -3,7 +3,7 @@ package org.atsign.atlogin.util;
 public class AtLoginUtil {
 
     public static String formatAsHiddenPublicKey(String key, String atSign) {
-        return "public:_" + key + formatAtsign(atSign, true);
+        return "__" + key + formatAtsign(atSign, true);
     }
 
     /**
@@ -36,5 +36,15 @@ public class AtLoginUtil {
         if (parameter == null || parameter.equals("")) {
             throw new IllegalArgumentException("Invalid argument provided for parameter: " + paramName);
         }
+    }
+
+    public static String formatKey(String key, String atsign){
+        if(key.contains("public:")){
+            key = key.replace("public:", "");
+        }
+        if(!key.contains(atsign)){
+            return key + formatAtsign(atsign, true);
+        }
+        return  key;
     }
 }

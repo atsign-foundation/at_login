@@ -67,7 +67,7 @@ public class AtLoginRestImpl implements AtLoginRestWrapper {
     private Map<String, String> processRequestBody(String jsonBody) throws JsonProcessingException {
         Map<String, String> parmsMap;
         parmsMap = mapper.readValue(jsonBody, Map.class);
-        System.out.println("Request Params are: " + parmsMap);
+        System.out.println("[AtVerify REST Wrapper] Request Params are: " + parmsMap);
 
         return parmsMap;
     }
