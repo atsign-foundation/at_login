@@ -32,7 +32,7 @@ atlogin-verify-service-1.0-jar-with-dependencies
 ### Staring the REST Service
 
 ```shell
-java -jar target/atlogin-verify-service-1.0-jar-with-dependencies startRest
+java -jar target/atlogin-verify-service-1.0-jar-with-dependencies  startRest
 ```
 The REST Server has now been started on your localhost in port=4567
 
