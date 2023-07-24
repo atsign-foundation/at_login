@@ -1,0 +1,4 @@
+org/atsign/atlogin/service/AtLoginServiceTest.class
+org/atsign/atlogin/util/ConfigReaderTest.class
+org/atsign/atlogin/service/MockSocket.class
+org/atsign/atlogin/util/AtLoginUtilTest.class

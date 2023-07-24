@@ -1,0 +1,10 @@
+org/atsign/atlogin/service/AtLoginService.class
+org/atsign/atlogin/rest/AtLoginRestImpl.class
+org/atsign/atlogin/util/KeyPair.class
+org/atsign/atlogin/rest/AtLoginRestWrapper.class
+org/atsign/atlogin/service/AtLoginServiceImpl.class
+org/atsign/atlogin/util/ConfigReader.class
+org/atsign/atlogin/util/SuccessResponse.class
+org/atsign/atlogin/Main.class
+org/atsign/atlogin/util/AtLoginUtil.class
+org/atsign/atlogin/util/ErrorResponse.class
