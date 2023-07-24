@@ -1,0 +1,23 @@
+{
+  "name": "oauth-node-server",
+  "version": "1.0.0",
+  "description": "nodejs server for oauth",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shris",
+  "license": "ISC",
+  "dependencies": {
+    "alert": "^5.1.4",
+    "axios": "^1.3.5",
+    "btoa": "^1.2.1",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.6",
+    "popups": "^1.1.3",
+    "uuid": "^9.0.0"
+  }
+}

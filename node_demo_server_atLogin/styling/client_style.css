@@ -1,0 +1,165 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: #f8f8f8;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+  font-weight: 600;
+}
+
+.col {
+  flex: 1;
+  /* display: table-column; */
+  margin-bottom: 5px;
+}
+
+input[type=text], input[type="email"] {
+  width: 30%;
+  border-radius: 4px;
+  padding: 12px 20px;
+  margin: 10px 18px;
+  box-sizing: border-box;
+  display: table-cell;
+}
+
+label {
+  display: inline-block;
+  /* text-align: justify; */
+  font-weight: 300;
+}
+
+.row {
+  display: ruby-base;
+  /* flex-wrap: nowrap; */
+  /* margin-bottom: 15px; */
+  /* padding: 15px; */
+}
+
+
+button[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button[type="submit"]:hover {
+  background-color: #555;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+img{
+  border-radius: 4px;
+  padding: 5px;
+  width: 200px;
+}
+
+h2 {
+  width: 80%; 
+  text-align: left; 
+} 
+
+.atsign {
+  background-color: #cd6230;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+input[type=submit]{
+  width: 150px;
+  overflow: hidden;
+  padding: 12px;
+  background: #d8cfcb;
+  border-radius: 10px ;
+}
+
+
+h2 span { 
+  background:#fff; 
+  padding:0 10px; 
+  font-size:14px; 
+}
+
+
+.or {
+  color: rgb(15, 14, 14);
+  text-align: center;
+  margin: 20px 0;
+}
+
+.or::before,
+.or::after {
+  content: "";
+  display: inline-block;
+  width: 30%;
+  margin: 0 10px;
+  border-top: 1px solid #080808;
+}
+
+.or span {
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #0f0f0f;
+  text-transform: uppercase;
+}
+
+/* .atsign-input-container {
+  display: flex;
+  width: 400px;
+  padding-left: 100px;
+} */
+/* .atsign-input-container {
+  display: inline-flex;
+  width: 800px;
+  height: auto;
+  margin: 20px auto;
+  padding-left: 20px;
+}
+
+.atsign-input-container h5 {
+  margin-right: 0px;
+}
+
+.input-wrapper {
+  flex: 0;
+} */
+
+.atsign-input-container {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  margin: 20px auto;
+  padding-left: 50px;
+}
