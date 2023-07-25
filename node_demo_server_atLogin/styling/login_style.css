@@ -1,0 +1,159 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F0F0F0;
+}
+form {
+    background-color: #FFF;
+    border-radius: 5px;
+    padding: 50px;
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 100px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+}
+img{
+    border-radius: 4px;
+    padding: 5px;
+    width: 250px;
+}
+h2 {
+    text-align: center;
+    margin-top: 0;
+}
+h6 {
+  text-align: center;
+  margin-top: 0;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+  }
+
+/* .div-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+  } */
+
+.div-center {
+    display: block;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+  }
+
+/* h4 {
+    text-align: center;
+    margin-top: 0;
+} */
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+input[type=atsign] {
+    width: 100%;
+    padding: 12px 20px;
+    /* margin: 8px 0; */
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+button[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+button[type=submit]:hover {
+    background-color: #45a049;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    margin: 20px auto;
+    padding-left: 50px;
+  }
+
+.input-container {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 800px;
+    height: auto;
+    margin: 20px auto;
+    padding-left: 20px;
+  }
+
+.refresh-icon {
+    margin-left: 20px; /* adjust as needed */
+    margin-top: 15px;
+    height: 50px;
+    padding-top: 5px;
+
+  } 
+
+
+h4 {
+    padding: 10px; /* Add 10 pixels of padding around each h4 element */
+  }
+
+#refresh-btn {
+    background-color: #4CAF50;
+    border: white;
+    color: white;
+    padding-bottom: 10px; 
+    border-radius: 5px;
+  } 
+
+  #refresh-btn:hover {
+    background-color: #3e8e41;
+  }
+
+  #login-btn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  #login-btn:hover {
+    background-color: #3e8e41;
+  } 
+
+  .atsign-input-container {
+    display: flex;
+    width: 400px;
+    padding-left: 200px;
+  }
+  
+  .atsign-input-container h5 {
+    margin-right: 5px;
+  }
+  
+  .input-wrapper {
+    flex: 1;
+  }
+  
+  

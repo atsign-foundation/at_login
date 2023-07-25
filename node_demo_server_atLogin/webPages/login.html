@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="login_style.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<form id="loginForm" method="get">
+		<img src="logo.jpg" alt="logo" class="center">
+		<h4>Please create the below key with the value specified in the secondary server and press login to proceed</h4>
+		<div class="input-container" >
+			<h4>Key</h4>
+		    <input type="text" id="key" name="key" required readonly>
+			<h4>Value</h4>
+		    <input type="text" id="value" name="value" required readonly>
+			<button id="refresh-btn" formaction="/login" class="refresh-icon"><i style="font-size:24px" class="fa">&#xf021;</i></button>
+		 </div>
+		 <div class="div-center">
+			<div class="button-container">
+			  <button id="login-btn" formaction="/loginResponse">Login</button>
+			</div>
+		  </div>
+		  <h6 id="error" ></h6>
+	</form>
+	<script>
+		fetch("uuid.json")
+          .then(response => response.json())
+          .then(json => {
+            document.getElementById("key").value = json.key;
+            document.getElementById("value").value = json.value;
+            
+          });
+
+		const loginButton = document.getElementById("login-btn");
+		loginButton.addEventListener("click", function() {
+		fetch("response_json.json")
+			.then(response => response.json())
+			.then(json => {
+			if(json.verificationStatus == false){
+
+				document.getElementById("error").innerHTML = "verification failed";
+				// window.location.href = "login.html";
+			} else {
+				// window.location.href = "login.html";
+			}
+			});
+		});
+</script>
+
+</body>
+</html>

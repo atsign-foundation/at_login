@@ -1,0 +1,3 @@
+rootServer:
+  domain: "root.atsign.org"
+  port: "64"
