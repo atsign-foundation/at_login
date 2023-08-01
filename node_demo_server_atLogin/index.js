@@ -26,9 +26,9 @@ app.get('/loginPage', (req, res) => {
 
 app.get('/login', (req, res) => { 
         
-        console.log("url********"+req.url);
+        console.log("url: "+req.url);
         var atsign = req.url.split('?')[1].split('=')[1].split('%40')[1];
-        console.log("key------------"+atsign);
+        console.log("key: "+atsign);
        	// make a request to the server-side endpoint
 		fetch("http://localhost:4567/generate", { 
             method: "POST",
@@ -44,7 +44,7 @@ app.get('/login', (req, res) => {
         })
         .then(response => response.json())
         .then(data => {
-            console.log("keyValuePair", data);
+            console.log("AuthToken: ", data);
             if (data.key != null) {
                 // Convert the response data to JSON String
                 const jsonData = JSON.stringify(data);
@@ -95,7 +95,7 @@ app.get('/loginResponse', (req, res) => {
         .then(response => response.json())
         .then(data => {
             console.log("response", data);
-            console.log("responseTyoe", data.responseType);
+            console.log("responseType", data.responseType);
             if (data.responseType != null) {
                 // Convert the response data to JSON String
                 const jsonData = JSON.stringify(data);
@@ -105,11 +105,10 @@ app.get('/loginResponse', (req, res) => {
                     console.log('output saved to file');
                     console.log(data.verificationStatus);
                     // check VerificationStatus
-                    if(data.verificationStatus==true){
+                    if(data.verificationStatus===true){
                         res.sendFile('pages/loginResponse.html', {root: __dirname});
-                    } else if(data.verificationStatus==false){
-                        res.sendFile('pages/login.html', {root: __dirname});
-                        res.end();
+                    } else if(data.verificationStatus===false){
+                        res.sendFile('pages/errorresponse.html', {root: __dirname});
                    }
                 });
             } else {
