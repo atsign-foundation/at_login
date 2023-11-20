@@ -3,8 +3,11 @@ package org.atsign.atlogin.service;
 import org.atsign.atlogin.util.AtLoginUtil;
 import org.atsign.atlogin.util.KeyPair;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import java.io.IOException;
-import java.util.UUID;
+
+import static org.atsign.atlogin.util.AtLoginUtil.getRandomAESKey;
 
 /**
  * Contains methods to help login with an atSign
@@ -17,10 +20,12 @@ public interface AtLoginService {
      * @param atSign
      * @param key
      * @param value
-     * @return true if the value is present in the secondary, else returns false
+     * @return true, if the value is present in the secondary, else returns false
      * @throws <code>Exception</code> the value cannot be looked up due to any network related issues
      */
     boolean verifyKey(String atSign, String key, String value) throws IOException;
+
+    boolean validateSignature(String key, String signature);
 
     /**
      * Creates a KeyPair for the given atsign that can be used as authentication token.
@@ -31,11 +36,12 @@ public interface AtLoginService {
      */
     default KeyPair generateAuthenticationKeyAndValue(String atSign) {
         // Create a key in the format <entity>.<namespace> format
-        // UUID is the entity and .atLogin is the namespace
-        String partKey = UUID.randomUUID() + ".atlogin";
+        // AES-128 random key is the entity and .atLogin is the namespace
+
+        String partKey = getRandomAESKey() + ".atlogin";
         KeyPair keyValue = new KeyPair();
         keyValue.key = AtLoginUtil.formatAsHiddenPublicKey(partKey, atSign);
-        keyValue.value = UUID.randomUUID().toString();
+        keyValue.value = getRandomAESKey();
         return keyValue;
     }
 

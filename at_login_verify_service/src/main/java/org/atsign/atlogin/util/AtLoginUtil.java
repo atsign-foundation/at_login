@@ -1,5 +1,8 @@
 package org.atsign.atlogin.util;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+
 public class AtLoginUtil {
 
     public static String formatAsHiddenPublicKey(String key, String atSign) {
@@ -46,5 +49,18 @@ public class AtLoginUtil {
             return key + formatAtsign(atsign, true);
         }
         return  key;
+    }
+    
+    public  static  String getRandomAESKey(){
+        String aesKey = null;
+        try {
+            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+            keyGen.init(128);
+            SecretKey secretKey = keyGen.generateKey();
+            aesKey = secretKey.toString();
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return aesKey;
     }
 }

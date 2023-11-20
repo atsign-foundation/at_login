@@ -25,7 +25,7 @@ public class AtLoginServiceImpl implements AtLoginService {
         validateParameter(value, "value");
 
         Socket secondarySocket = getSecondarySocket(atsign);
-        // lookup for key
+        // lookup for a key
         String response;
         try {
             response = executeCommand("lookup:" + formatKey(key, atsign),
@@ -36,8 +36,14 @@ public class AtLoginServiceImpl implements AtLoginService {
             System.out.println("[Verify Service] Caught Exception: " + e);
             throw new SocketException("Unable to lookup key" + key + "on secondary");
         }
+        System.out.println(response);
         System.out.println("[Verify Service] Created socket to secondary server successfully");
         return response.equals(value);
+    }
+
+    @Override
+    public boolean validateSignature(String key, String signature) {
+        return false;
     }
 
     private Socket getSecondarySocket(String atsign) throws SocketException {
